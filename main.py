@@ -108,6 +108,14 @@ class Record:
                 return p
         # raise ValueError()
 
+    def find_entry_phone(self, phone):
+        for p in self.phones:
+            ph = p.value[:]
+            if str(phone) in str(ph):
+                return True
+            else:
+                return False
+
     def remove_phone(self, phone):
         for p in self.phones:
             if Phone(phone).value == p.value:
@@ -238,6 +246,23 @@ def del_record(*args):
         raise KeyError()
 
 
+def seek(*args):
+    find = False
+    seek_info = args[0].lower()
+    for name, record in customers.data.items():
+        if seek_info in name:
+            print(record)
+            find = True
+        elif seek_info.isdigit():
+            if record.find_entry_phone(seek_info):
+                print(record)
+                find = True
+    if not find:
+        return f'Nothing was found for your request.'
+    else:
+        return f'There are all records with seek entries.'
+
+
 @input_error
 def add_phone(*args):
     name = args[0].lower()
@@ -362,6 +387,7 @@ COMMANDS = {add_record: "add",
             hello: "hello",
             help: "help",
             phone: "phone",
+            seek: "seek",
             show_all: "show_all",
             remove_phone: "remove_phone"
             }
