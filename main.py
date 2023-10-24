@@ -350,6 +350,7 @@ def help(*args):
     seek 'name' 'phone' - find phone for name in the dictionary
     phone 'name' - show phone number for this name
     remove_phone 'name' 'phone' - remove phone for this name
+    seek 'info' - seek all records includes 'info' in Name or Phone
     show_all  -  show all records in the dictionary
     show_all 'N' - show records by N numbers
     exit - exit from bot'''
