@@ -2,6 +2,8 @@ from collections import UserDict
 from datetime import datetime
 from itertools import islice
 import pickle
+from prompt_toolkit import PromptSession
+from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 import os.path
 
 
@@ -422,10 +424,13 @@ def parser(text: str):
     return unknown, []
 
 
+session = PromptSession()
+
+
 def main():
     while True:
-        user_input = input(
-            "Enter user name and phone number or 'help' for help: ")
+        user_input = session.prompt(
+            "Enter user name and phone number or 'help' for help: ", auto_suggest=AutoSuggestFromHistory())
         func, data = parser(user_input)
         print(func(*data))
         if user_input == 'exit':
