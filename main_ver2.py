@@ -323,6 +323,20 @@ def days_to_birthday(*args):
         raise KeyError()
 
 
+@input_error
+def birthday_in(*args):
+    num_days = int(args[0])
+    for name in customers:
+        rec = customers.get(name)
+        try:
+            days = rec.days_to_birthday()
+            if days <= num_days:
+                print(f"{rec} birthday in {days} days")
+        except DateError:
+            continue
+    return f"Our birthday people in {num_days} days"
+
+
 def unknown(*args):
     return "Unknown command. Try again."
 
@@ -343,6 +357,7 @@ def help(*args):
     add_phone 'name' 'phone'  - add phone number to the name in dictionary
     change 'name' 'old_phone' 'new_phone' - change phone number in this name
     days_to_birthday 'name' - return number days to birhday
+    birthday 'num' - return records with birthday date in 'num' days
     delete 'name' - delete name and phones from the dictionary
     find 'name' - find info by name
     seek 'name' 'phone' - find phone for name in the dictionary
@@ -381,6 +396,7 @@ def phone(*args):
 COMMANDS = {add_record: "add",
             add_birhday: "add_b",
             add_phone: "add_phone",
+            birthday_in: "birthday",
             change_record: "change",
             days_to_birthday: "days_to_birthday",
             del_record: "delete",
