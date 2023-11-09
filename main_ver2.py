@@ -407,8 +407,6 @@ def parser(text: str):
 
 
 def main():
-    global customers
-    customers = customers.read_contacts_from_file(filename)
     while True:
         user_input = input(
             "Enter user name and phone number or 'help' for help: ")
@@ -419,4 +417,5 @@ def main():
 
 
 if __name__ == '__main__':
+    customers = customers.read_contacts_from_file(filename)
     main()
